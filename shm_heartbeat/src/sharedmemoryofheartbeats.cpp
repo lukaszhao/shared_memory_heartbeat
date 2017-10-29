@@ -71,10 +71,10 @@ bool SharedMemoryOfHeartbeats::destroySharedMemory()
     try{
         std::cout << "First destroy the vector from the segment\n";
         //Destroy the vector from the segment
-	    d_segment.destroy<HeartbeatVector>("MyHeartbeatVector");
+        d_segment.destroy<HeartbeatVector>("MyHeartbeatVector");
 
-	    std::cout << "Then destroy managed_shared_memory\n";
-	    //Destroy managed_shared_memory using shared_memory_object::remove()
+        std::cout << "Then destroy managed_shared_memory\n";
+        //Destroy managed_shared_memory using shared_memory_object::remove()
         shared_memory_object::remove("WatchdogSharedMemoryOfHeartbeats");
 
         return true;

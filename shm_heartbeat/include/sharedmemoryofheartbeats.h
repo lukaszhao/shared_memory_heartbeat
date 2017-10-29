@@ -72,7 +72,7 @@ class SharedMemoryOfHeartbeats
         // getters
         const std::string& sharedMemoryName() const { return d_sharedMemoryName; }
         int maxNumComponents() const { return d_maxNumComponents; }
-        //const Heartbeat* hearbeatVectorPtr() const { return d_heartbeatVectorPtr; }
+
 };
 
 #endif // SHAREDMEMORYOFHEARTBEATS_H
