@@ -24,6 +24,6 @@
 *.lib
 
 # Executables
-# *.exe #let's upload exe
+*.exe
 *.out
 *.app

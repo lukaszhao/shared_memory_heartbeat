@@ -2,23 +2,24 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="shm_heartbeat" />
+		<Option title="component_interface" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/shm_heartbeat" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/component_interface" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="include" />
 					<Add directory="../../../../boost_1_62_0/boost_1_62_0" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/shm_heartbeat" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/component_interface" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -35,16 +36,25 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add directory="../../../../boost_1_62_0/boost_1_62_0" />
+			<Add directory="../shm_heartbeat/include" />
 		</Compiler>
+		<ResourceCompiler>
+			<Add directory="../shm_heartbeat/src" />
+		</ResourceCompiler>
+		<Unit filename="include/componentinterface.h" />
 		<Unit filename="include/heartbeat.h" />
 		<Unit filename="include/sharedmemoryofheartbeats.h" />
+		<Unit filename="include/watchdoginterface.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/componentinterface.cpp" />
 		<Unit filename="src/heartbeat.cpp" />
 		<Unit filename="src/sharedmemoryofheartbeats.cpp" />
+		<Unit filename="src/watchdoginterface.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
+			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
