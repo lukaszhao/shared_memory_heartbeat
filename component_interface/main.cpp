@@ -3,16 +3,28 @@
 #include <componentinterface.h>
 #include <watchdoginterface.h>
 
+#include <memory>
+#include <vector>
+
 using namespace std;
 
 
 void test_component()
 {
-    ComponentInterface compInterface("HeartAttack001");
-    compInterface.updateHeartbeatTimestampPeriodically();
+    getchar();
+    string compName;
+    cout << "component name = ";
+    std::getline(std::cin, compName);
+    //ComponentInterface compInterface(compName);
+    //compInterface.startHeartbeat();
+
+    std::shared_ptr<ComponentInterface> compIntfPtr(new ComponentInterface(compName));
+    compIntfPtr->startHeartbeat();
 
     char yesOrNo = 'n';
     std::cout << "Enter y to stop... \n"; std::cin >> yesOrNo;
+    //compInterface.stopHeartbeat();
+    compIntfPtr->stopHeartbeat();
 }
 
 void test_watchdog()
@@ -28,11 +40,6 @@ void try_destroy()
 {
     try
     {
-        managed_shared_memory d_segment(open_or_create, "WatchdogSharedMemoryOfHeartbeats", 1000 * sizeof(Heartbeat) + 1000);
-        //std::cout << "First destroy the vector from the segment\n";
-        //Destroy the vector from the segment
-        //d_segment.destroy<HeartbeatVector>("MyHeartbeatVector");
-
         std::cout << "destroy managed_shared_memory\n";
         //Destroy managed_shared_memory using shared_memory_object::remove()
         shared_memory_object::remove("WatchdogSharedMemoryOfHeartbeats");
@@ -53,6 +60,7 @@ int main()
         cout << "4. Add one component to shared memory\n";
         cout << "5. get last heartbeat time\n";
         cout << "6. update heartbeat time\n";
+        cout << "7. stress test\n";
         int selectNum;
         cout << "select: "; cin >> selectNum;
 
@@ -107,6 +115,27 @@ int main()
                 } else {
                     std::cout << "Failed to refresh heartbeat time\n";
                 }
+            } break;
+
+            case 7: {
+                int maxNumComp;
+                cout << "How many component to start: ";
+                cin >> maxNumComp;
+                getchar();
+                try_destroy();
+
+                SharedMemoryOfHeartbeats myShm(maxNumComp);
+
+                std::vector< std::shared_ptr<ComponentInterface> > vecCompIntfPtr;
+
+                for(int i = 0; i < maxNumComp; ++i) {
+                    string compName = "test_" + to_string(i);
+
+                    vecCompIntfPtr.emplace_back(new ComponentInterface(compName));
+                    vecCompIntfPtr[i]->startHeartbeat();
+                }
+
+                while(true);
             } break;
         }
     }

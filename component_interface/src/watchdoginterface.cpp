@@ -21,8 +21,8 @@ void WatchdogInterface::componentHearbeatStoppedCallback(const std::string& comp
 void WatchdogInterface::monitorAllComponentsPeriodically()
 {
     // start a child thread with this function
-    std::cout << "DEBUG: WatchdogInterface::monitorAllComponentsPeriodically() called\n";
-    std::cout << "DEBUG: shared memory is:" << d_sharedMemory;
+    //std::cout << "DEBUG: WatchdogInterface::monitorAllComponentsPeriodically() called\n";
+    //std::cout << "DEBUG: shared memory is:" << d_sharedMemory;
     std::cout << "INFO: d_sharedMemory.vectorSize() = " << d_sharedMemory.vectorSize() << "\n";
 
     time_t timeNow;
@@ -31,19 +31,19 @@ void WatchdogInterface::monitorAllComponentsPeriodically()
         std::cout << "\n\n\n++++++++++++++++++++++++++++++++++++++++++\n";
         for(int i = 0; i < d_sharedMemory.vectorSize(); ++i) {
 
-            std::cout << "DEBUG: d_sharedMemory.vectorSize() = " << d_sharedMemory.vectorSize() << "\n";
+            //std::cout << "DEBUG: d_sharedMemory.vectorSize() = " << d_sharedMemory.vectorSize() << "\n";
 
             timeNow = time(nullptr);  // get time now for before comparing each component's lastHeartbeatTime
                                       // maybe it is not necessary, maybe only get now once before entering for loop is enough
-            std::cout << "DEBUG: timeNow = " << timeNow << "\n";
+            //std::cout << "DEBUG: timeNow = " << timeNow << "\n";
 
             time_t compLastHeartbeatTime;
             d_sharedMemory.readComponentLastHeartbeatTime(i, compLastHeartbeatTime);
-            std::cout << "DEBUG: compLastHeartbeatTime = " << compLastHeartbeatTime << "\n";
+            //std::cout << "DEBUG: compLastHeartbeatTime = " << compLastHeartbeatTime << "\n";
 
             std::string compName;
             d_sharedMemory.readComponentName(i, compName);
-            std::cout << "DEBUG: compName = " << compName << "\n";
+            //std::cout << "DEBUG: compName = " << compName << "\n";
 
             // print info
             std::cout << i << ": " << compName << "............" << compLastHeartbeatTime << "\n";

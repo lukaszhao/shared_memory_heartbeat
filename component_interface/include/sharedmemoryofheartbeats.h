@@ -41,7 +41,7 @@ public:
         if(d_heartbeatVectorPtr == 0) {
             // did not find it, this process must be the first to create the the shared memory
             // so we also need to construct the vector
-            std::cout << "DEBUG: Did not find MyHeartbeatVector in shared memory, need to construct it.\n";
+            //std::cout << "DEBUG: Did not find MyHeartbeatVector in shared memory, need to construct it.\n";
 
             //Initialize shared memory STL-compatible allocator
             const ShmemAllocator alloc_inst(d_segment.get_segment_manager());
@@ -49,7 +49,7 @@ public:
             //Construct a vector named "MyHeartbeatVector" in shared memory with argument alloc_inst
             d_heartbeatVectorPtr = d_segment.construct<HeartbeatVector>("MyHeartbeatVector")(alloc_inst);
         } else {
-            std::cout << "DEBUG: Found MyHeartbeatVector in shared memory, size = " << d_heartbeatVectorPtr->size() << "\n";
+            //std::cout << "DEBUG: Found MyHeartbeatVector in shared memory, size = " << d_heartbeatVectorPtr->size() << "\n";
         }
     }
 

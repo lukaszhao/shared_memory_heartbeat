@@ -19,7 +19,7 @@ bool SharedMemoryOfHeartbeats::refreshHeartbeatTime(int index_of_shm_unit)
     // refresh last heartbeat time
     (*d_heartbeatVectorPtr)[index_of_shm_unit].setLastHeartbeatTimeAsNow();
 
-    std::cout << "DEBUG: refreshed heartbeat time stamp for index_of_shm_unit = " << index_of_shm_unit << "\n";
+    //std::cout << "DEBUG: refreshed heartbeat time stamp for index_of_shm_unit = " << index_of_shm_unit << "\n";
 
     return true;
 }
@@ -79,7 +79,7 @@ bool SharedMemoryOfHeartbeats::readComponentLastHeartbeatTime(int index_of_shm_u
 bool SharedMemoryOfHeartbeats::readComponentName(int index_of_shm_unit,
         std::string& componentName) const
 {
-    std::cout << "DEBUG: SharedMemoryOfHeartbeats::readComponentName called\n";
+    //std::cout << "DEBUG: SharedMemoryOfHeartbeats::readComponentName called\n";
 
     // first check if index_of_shm_unit is out of bound
     if(index_of_shm_unit >= d_heartbeatVectorPtr->size())
@@ -90,7 +90,7 @@ bool SharedMemoryOfHeartbeats::readComponentName(int index_of_shm_unit,
 
     // passed checking
     componentName = d_heartbeatVectorPtr->at(index_of_shm_unit).componentName();
-    std::cout << "DEBUG: successfully got componentName = " << componentName << "\n";
+    //std::cout << "DEBUG: successfully got componentName = " << componentName << "\n";
     return true;
 }
 

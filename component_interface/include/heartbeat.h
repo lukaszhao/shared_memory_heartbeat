@@ -26,7 +26,7 @@ public:
 
     std::string componentName()
     {
-        std::cout << "DEBUG: Heartbeat::componentName() called, d_componentName = " << d_componentName << "\n";
+        //std::cout << "DEBUG: Heartbeat::componentName() called, d_componentName = " << d_componentName << "\n";
         std::string str(d_componentName);
         return str;
     }
@@ -40,7 +40,7 @@ public:
 
     void setComponentName(const std::string& componentName)
     {
-        std::cout << "DEBUG: Heartbeat::setComponentName called\n";
+        //std::cout << "DEBUG: Heartbeat::setComponentName called\n";
         size_t strMaxIndex = 48;
         if(strMaxIndex > componentName.size()) {
             strMaxIndex = componentName.size() - 1;
@@ -51,7 +51,7 @@ public:
         for(size_t i = strMaxIndex + 1; i <= 49; ++i) {
             d_componentName[i] = '\0';
         }
-        std::cout << "DEBUG: after setComponentName, d_componentName = " << d_componentName << "\n";
+        //std::cout << "DEBUG: after setComponentName, d_componentName = " << d_componentName << "\n";
     }
 
 

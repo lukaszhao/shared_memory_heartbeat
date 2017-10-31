@@ -17,7 +17,8 @@ class ComponentInterface
     public:
         ComponentInterface(const std::string& componentName):
             d_componentName(componentName),
-            d_sharedMemory()  // calling constructor with default maxNumComponents
+            d_sharedMemory(),  // calling constructor with default maxNumComponents
+            d_stopHeartbeatThread(false)
         {
             bool success = d_sharedMemory.addComponentToSharedMemory(componentName, d_index_of_shm_unit);
                            // note: addComponentToSharedMemory function does check if the component
@@ -39,6 +40,8 @@ class ComponentInterface
         SharedMemoryOfHeartbeats          d_sharedMemory;
         bool                              d_componentIsInSharedMemory;
 
+        bool                              d_stopHeartbeatThread;
+
         const static int                  HEARTBEAT_INTERVEL;
 
 
@@ -50,6 +53,8 @@ class ComponentInterface
         bool startHeartbeat();
             // start a child thread which updates heartbeat time stamp every HEARTBEAT_INTERVAL
             // return true if succeeds, o.w. false
+
+        bool stopHeartbeat();
 
 
 };
