@@ -32,7 +32,7 @@ class ComponentInterface
             }
         }
 
-        ~ComponentInterface();
+        ~ComponentInterface() {}
 
     private:
         int                               d_index_of_shm_unit;

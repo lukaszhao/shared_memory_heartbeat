@@ -14,7 +14,8 @@ class WatchdogInterface
 {
     public:
         WatchdogInterface():
-            d_sharedMemory()
+            d_sharedMemory(),
+            d_stopMonitoring(false)
         {
 
         }
@@ -25,9 +26,11 @@ class WatchdogInterface
     private:
         SharedMemoryOfHeartbeats          d_sharedMemory;
 
+        bool                              d_stopMonitoring;
+
         const static int                  HEARTBEAT_INTERVEL;
 
-        void componentHearbeatStoppedCallback(const std::string& componentName, const time_t& lastHeartbeatTime);
+        void static componentHearbeatStoppedCallback(const std::string& componentName, const time_t& lastHeartbeatTime);
             // when monitor thread discovers a component heartbeat stops
             // this function is called, and componentName and lastHeartbeatTime
             // are returned through argument refs
@@ -36,9 +39,12 @@ class WatchdogInterface
 
     public:
 
-        void monitorAllComponentsPeriodically();
+        void monitorAllComponentsPeriodically(void (*cb)(const std::string& componentName, const time_t& lastHeartbeatTime)) const;
 
         void startMonitoring();
+
+        void stopMonitoring();
+
 };
 
 #endif // WATCHDOGINTERFACE_H

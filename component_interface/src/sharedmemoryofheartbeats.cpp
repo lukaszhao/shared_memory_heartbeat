@@ -82,7 +82,7 @@ bool SharedMemoryOfHeartbeats::readComponentName(int index_of_shm_unit,
     //std::cout << "DEBUG: SharedMemoryOfHeartbeats::readComponentName called\n";
 
     // first check if index_of_shm_unit is out of bound
-    if(index_of_shm_unit >= d_heartbeatVectorPtr->size())
+    if(static_cast<unsigned int>(index_of_shm_unit) >= d_heartbeatVectorPtr->size())
     {
         std::cout << "ERROR: index_of_shm_unit is out of bound of shard memory !\n";
         return false;

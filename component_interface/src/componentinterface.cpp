@@ -4,10 +4,6 @@
 
 const int ComponentInterface::HEARTBEAT_INTERVEL = 5;
 
-ComponentInterface::~ComponentInterface()
-{
-
-}
 
 void ComponentInterface::updateHeartbeatTimestampPeriodically()
 {

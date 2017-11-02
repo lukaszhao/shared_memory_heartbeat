@@ -18,7 +18,7 @@ void WatchdogInterface::componentHearbeatStoppedCallback(const std::string& comp
 }
 
 
-void WatchdogInterface::monitorAllComponentsPeriodically()
+void WatchdogInterface::monitorAllComponentsPeriodically(void (*cb)(const std::string& componentName, const time_t& lastHeartbeatTime)) const
 {
     // start a child thread with this function
     //std::cout << "DEBUG: WatchdogInterface::monitorAllComponentsPeriodically() called\n";
@@ -49,18 +49,29 @@ void WatchdogInterface::monitorAllComponentsPeriodically()
             std::cout << i << ": " << compName << "............" << compLastHeartbeatTime << "\n";
 
             if(abs(static_cast<int>(timeNow - compLastHeartbeatTime)) > HEARTBEAT_INTERVEL * 2) {
-                // declare component stopped heartbeat
-                std::cout << "ALERT: component[" << compName << "] stopped heartbeat!\n";
+                // component stooped heartbeat, callback
+                cb(compName, compLastHeartbeatTime);
             }
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(HEARTBEAT_INTERVEL));
+
+        if(d_stopMonitoring) { break; }
     }
 }
 
 
 void WatchdogInterface::startMonitoring()
 {
-    std::thread monitorThread(monitorAllComponentsPeriodically, this);
+    d_stopMonitoring = false;
+    std::thread monitorThread(&(WatchdogInterface::monitorAllComponentsPeriodically),
+                              this,
+                              WatchdogInterface::componentHearbeatStoppedCallback);
     monitorThread.detach();
 }
+
+void WatchdogInterface::stopMonitoring()
+{
+    d_stopMonitoring = true;
+}
+

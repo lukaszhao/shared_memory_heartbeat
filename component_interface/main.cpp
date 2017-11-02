@@ -30,10 +30,12 @@ void test_component()
 void test_watchdog()
 {
     WatchdogInterface dogInterface;
-    dogInterface.monitorAllComponentsPeriodically();
+    dogInterface.startMonitoring();
 
     char yesOrNo = 'n';
     std::cout << "Enter y to stop... \n"; std::cin >> yesOrNo;
+
+    dogInterface.stopMonitoring();
 }
 
 void try_destroy()
