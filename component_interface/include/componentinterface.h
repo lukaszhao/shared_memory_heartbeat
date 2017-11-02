@@ -27,12 +27,14 @@ class ComponentInterface
                 std::cout << "ERROR: Failed to add component [" << componentName <<"] to shared memory !\n";
                 d_componentIsInSharedMemory = false;
             } else {
-                std::cout << "INFO: Successfully added component [" << componentName << "] into shared memory !\n";
                 d_componentIsInSharedMemory = true;
             }
         }
 
-        ~ComponentInterface() {}
+        ~ComponentInterface()
+        {
+            stopHeartbeat();  // to make sure that heartbeat thread exists before this object can be destroyed
+        }
 
     private:
         int                               d_index_of_shm_unit;

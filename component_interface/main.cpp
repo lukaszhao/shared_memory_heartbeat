@@ -55,6 +55,7 @@ void try_destroy()
 int main()
 {
     while(true) {
+        cout << "\n\n=============================\n";
         cout << "0. Destroy shared memory\n";
         cout << "1. Start component\n";
         cout << "2. Start watchdog\n";

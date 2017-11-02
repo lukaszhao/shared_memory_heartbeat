@@ -3,7 +3,7 @@
 #include <stdlib.h>     // to use abs(int x)
 
 
-const int WatchdogInterface::HEARTBEAT_INTERVEL = 5;
+const int WatchdogInterface::HEARTBEAT_INTERVEL = 1;
 
 
 
@@ -21,9 +21,7 @@ void WatchdogInterface::componentHearbeatStoppedCallback(const std::string& comp
 void WatchdogInterface::monitorAllComponentsPeriodically(void (*cb)(const std::string& componentName, const time_t& lastHeartbeatTime)) const
 {
     // start a child thread with this function
-    //std::cout << "DEBUG: WatchdogInterface::monitorAllComponentsPeriodically() called\n";
-    //std::cout << "DEBUG: shared memory is:" << d_sharedMemory;
-    std::cout << "INFO: d_sharedMemory.vectorSize() = " << d_sharedMemory.vectorSize() << "\n";
+    std::cout << "INFO: *** start monitoring thread ***\n";
 
     time_t timeNow;
 
@@ -58,6 +56,8 @@ void WatchdogInterface::monitorAllComponentsPeriodically(void (*cb)(const std::s
 
         if(d_stopMonitoring) { break; }
     }
+
+    std::cout << "INFO: *** exit monitoring thread ***\n";
 }
 
 
@@ -73,5 +73,9 @@ void WatchdogInterface::startMonitoring()
 void WatchdogInterface::stopMonitoring()
 {
     d_stopMonitoring = true;
+
+    std::this_thread::sleep_for(std::chrono::seconds(HEARTBEAT_INTERVEL + 1));
+                   // to make sure monitor thread exists before this object can be destroyed
+                   // so that monitor thread does not try to access already released members
 }
 

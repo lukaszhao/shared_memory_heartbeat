@@ -20,7 +20,10 @@ class WatchdogInterface
 
         }
 
-        ~WatchdogInterface() {}
+        ~WatchdogInterface()
+        {
+            stopMonitoring();  // to make sure monitor threads exists before this object can be destroyed
+        }
 
 
     private:

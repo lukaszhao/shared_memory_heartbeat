@@ -2,7 +2,7 @@
 
 
 
-const int ComponentInterface::HEARTBEAT_INTERVEL = 5;
+const int ComponentInterface::HEARTBEAT_INTERVEL = 1;
 
 
 void ComponentInterface::updateHeartbeatTimestampPeriodically()
@@ -45,6 +45,10 @@ bool ComponentInterface::stopHeartbeat()
 {
     // set the flag, and when heartbeat thread checks the flag, should terminate thread
     d_stopHeartbeatThread = true;
+    std::this_thread::sleep_for(std::chrono::seconds(HEARTBEAT_INTERVEL + 1));
+               //to make sure heartbeat thread exits, before this object can be destroyed
+               //so that heartbeat thread does not try to access already released members
+
     return true;
 }
 

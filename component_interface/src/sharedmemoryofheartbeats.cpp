@@ -27,13 +27,14 @@ bool SharedMemoryOfHeartbeats::refreshHeartbeatTime(int index_of_shm_unit)
 bool SharedMemoryOfHeartbeats::addComponentToSharedMemory(const std::string& componentName,
         int& index_of_shm_unit)
 {
-    // first check if component already exists in shared memory
+    // first check if component already exists in shared memory, if yes, return its index_of_shm_unit
     for(unsigned int i = 0; i < d_heartbeatVectorPtr->size(); ++i)
     {
         if(d_heartbeatVectorPtr->at(i).componentName() == componentName)
         {
             // this component already exists in shared memory
             index_of_shm_unit = i;
+            std::cout << "INFO: component [" << componentName <<"] already exists in shared memory\n";
             return true;
         }
     }
@@ -65,9 +66,10 @@ bool SharedMemoryOfHeartbeats::readComponentLastHeartbeatTime(int index_of_shm_u
         time_t& lastHeartbeatTime) const
 {
     // first check if index_of_shm_unit is out of bound
-    if(index_of_shm_unit >= d_maxNumComponents)
+    if(static_cast<unsigned int>(index_of_shm_unit) >= d_heartbeatVectorPtr->size())
     {
-        std::cout << "ERROR: index_of_shm_unit is out of bound of shard memory !\n";
+        std::cout << "ERROR: index_of_shm_unit is out of bound of shard memory ! vector size is: "
+                  << d_heartbeatVectorPtr->size() << "\n\n";
         return false;
     }
 
@@ -84,7 +86,8 @@ bool SharedMemoryOfHeartbeats::readComponentName(int index_of_shm_unit,
     // first check if index_of_shm_unit is out of bound
     if(static_cast<unsigned int>(index_of_shm_unit) >= d_heartbeatVectorPtr->size())
     {
-        std::cout << "ERROR: index_of_shm_unit is out of bound of shard memory !\n";
+        std::cout << "ERROR: index_of_shm_unit is out of bound of shard memory ! vector size is: "
+                  << d_heartbeatVectorPtr->size() << "\n\n";
         return false;
     }
 
