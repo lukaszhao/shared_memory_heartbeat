@@ -1,6 +1,8 @@
 #ifndef COMPONENTINTERFACE_H
 #define COMPONENTINTERFACE_H
 
+#include <globalconstants.h>
+
 #include <sharedmemoryofheartbeats.h>
 
 #include <string>
@@ -43,8 +45,6 @@ class ComponentInterface
         bool                              d_componentIsInSharedMemory;
 
         bool                              d_stopHeartbeatThread;
-
-        const static int                  HEARTBEAT_INTERVEL;
 
 
 

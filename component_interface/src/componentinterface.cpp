@@ -2,7 +2,7 @@
 
 
 
-const int ComponentInterface::HEARTBEAT_INTERVEL = 1;
+
 
 
 void ComponentInterface::updateHeartbeatTimestampPeriodically()

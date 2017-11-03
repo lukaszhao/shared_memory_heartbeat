@@ -42,6 +42,7 @@
 			<Add directory="../shm_heartbeat/src" />
 		</ResourceCompiler>
 		<Unit filename="include/componentinterface.h" />
+		<Unit filename="include/globalconstants.h" />
 		<Unit filename="include/heartbeat.h" />
 		<Unit filename="include/sharedmemoryofheartbeats.h" />
 		<Unit filename="include/watchdoginterface.h" />

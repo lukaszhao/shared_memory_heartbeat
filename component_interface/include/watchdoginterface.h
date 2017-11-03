@@ -1,6 +1,9 @@
 #ifndef WATCHDOGINTERFACE_H
 #define WATCHDOGINTERFACE_H
 
+
+#include <globalconstants.h>
+
 #include <sharedmemoryofheartbeats.h>
 
 #include <string>
@@ -30,8 +33,6 @@ class WatchdogInterface
         SharedMemoryOfHeartbeats          d_sharedMemory;
 
         bool                              d_stopMonitoring;
-
-        const static int                  HEARTBEAT_INTERVEL;
 
         void static componentHearbeatStoppedCallback(const std::string& componentName, const time_t& lastHeartbeatTime);
             // when monitor thread discovers a component heartbeat stops

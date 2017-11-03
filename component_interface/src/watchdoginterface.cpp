@@ -3,8 +3,6 @@
 #include <stdlib.h>     // to use abs(int x)
 
 
-const int WatchdogInterface::HEARTBEAT_INTERVEL = 1;
-
 
 
 
