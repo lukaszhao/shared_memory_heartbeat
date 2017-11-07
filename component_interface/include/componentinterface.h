@@ -20,6 +20,7 @@ class ComponentInterface
         ComponentInterface(const std::string& componentName):
             d_componentName(componentName),
             d_sharedMemory(),  // calling constructor with default maxNumComponents
+            d_componentIsInSharedMemory(false),
             d_stopHeartbeatThread(false)
         {
             bool success = d_sharedMemory.addComponentToSharedMemory(componentName, d_index_of_shm_unit);
